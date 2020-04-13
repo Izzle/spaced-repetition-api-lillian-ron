@@ -47,6 +47,7 @@ VALUES
   (24, 1, 'ね', 'ne', 25),
   (25, 1, 'の', 'no', null);
   --stopped at 10 alphabeta characters, we can add the remaining letters later
+  -- also need to update the languageWords in /src/user/user-service.js
 
 UPDATE "language" SET head = 1 WHERE id = 1;
 
