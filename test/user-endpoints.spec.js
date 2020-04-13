@@ -184,7 +184,22 @@ describe('User Endpoints', function () {
             { original: 'き', translation: 'ki' },
             { original: 'く', translation: 'ku' },
             { original: 'け', translation: 'ke' },
-            { original: 'こ', translation: 'ko' }
+            { original: 'こ', translation: 'ko' },
+            { original: 'さ', translation: 'sa' },
+            { original: 'し', translation: 'shi' },
+            { original: 'す', translation: 'su' },
+            { original: 'せ', translation: 'se' },
+            { original: 'そ', translation: 'so' },
+            { original: 'た', translation: 'ta' },
+            { original: 'ち', translation: 'chi' },
+            { original: 'つ', translation: 'tsu' },
+            { original: 'て', translation: 'te' },
+            { original: 'と', translation: 'to' },
+            { original: 'な', translation: 'na' },
+            { original: 'に', translation: 'ni' },
+            { original: 'ぬ', translation: 'nu' },
+            { original: 'ね', translation: 'ne' },
+            { original: 'の', translation: 'no' }
           ]
         }
         return supertest(app)

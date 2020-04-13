@@ -56,7 +56,10 @@ const UserService = {
         .from('word_id_seq')
         .select('last_value')
         .first()
-
+      
+      // note: you should be able to easily get the values for each array if you
+      // inspect the seed file, for the INSERT INTO 'word' VALUES section, it is
+      // the last 3 entries (x, x, "original", "translation", "next")
       const languageWords = [
         ['あ', 'a', 2],
         ['い', 'i', 3],
@@ -67,7 +70,22 @@ const UserService = {
         ['き', 'ki', 8],
         ['く', 'ku', 9],
         ['け', 'ke', 10],
-        ['こ', 'ko', null]
+        ['こ', 'ko', 11],
+        ['さ', 'sa', 12],
+        ['し', 'shi', 13],
+        ['す', 'su', 14],
+        ['せ', 'se', 15],
+        ['そ', 'so', 16],
+        ['た', 'ta', 17],
+        ['ち', 'chi', 18],
+        ['つ', 'tsu', 19],
+        ['て', 'te', 20],
+        [ 'と', 'to', 21],
+        ['な', 'na', 22],
+        ['に', 'ni', 23],
+        ['ぬ', 'nu', 24],
+        ['ね', 'ne', 25],
+        ['の', 'no', null]
       ]
 
       const [languageHeadId] = await trx
