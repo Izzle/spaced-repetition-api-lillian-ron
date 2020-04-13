@@ -1,4 +1,5 @@
 BEGIN;
+SET CLIENT_ENCODING to 'UTF8';
 
 TRUNCATE
   "word",
