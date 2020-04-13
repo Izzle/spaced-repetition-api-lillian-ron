@@ -183,6 +183,8 @@ describe('User Endpoints', function () {
             { original: 'か', translation: 'ka' },
             { original: 'き', translation: 'ki' },
             { original: 'く', translation: 'ku' },
+            { original: 'け', translation: 'ke' },
+            { original: 'こ', translation: 'ko' }
           ]
         }
         return supertest(app)
