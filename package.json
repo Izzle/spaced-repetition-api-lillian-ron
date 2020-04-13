@@ -8,6 +8,7 @@
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) postgrator --config postgrator-config.js",
     "start": "node src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
@@ -20,9 +21,9 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "helmet": "^3.15.0",
+    "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.16.3",
+    "knex": "^0.20.13",
     "morgan": "^1.9.1",
     "pg": "^7.8.2"
   },
