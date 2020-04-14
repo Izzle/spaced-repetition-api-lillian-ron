@@ -78,4 +78,4 @@ Set the encoding
 Inject the seed file (note: this path is assuming your current directory is the project folder itself):
 ```\i .\seeds\seed.tables.sql```
 Or for Windows:
-```\i ./seeds/seed.tabes.sql``` 
+```\i ./seeds/seed.tables.sql``` 
