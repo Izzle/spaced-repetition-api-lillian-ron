@@ -28,6 +28,20 @@ const LanguageService = {
       )
       .where({ language_id })
   },
+
+  getLanguageWord(db, language_id, user_id) {
+      return db 
+        .from('word AS w')
+        .leftJoin('language AS l', 'l.user_id', user_id)
+        .select(
+          'w.original',
+          'w.correct_count',
+          'w.incorrect_count',
+          'l.total_score',
+        )
+        .where({ language_id })
+        .first()
+  }
 }
 
 module.exports = LanguageService
