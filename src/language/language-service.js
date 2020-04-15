@@ -1,3 +1,5 @@
+const LinkedList = require('../SLL/LinkedList');
+
 const LanguageService = {
   getUsersLanguage(db, user_id) {
     return db
@@ -7,10 +9,10 @@ const LanguageService = {
         'language.name',
         'language.user_id',
         'language.head',
-        'language.total_score',
+        'language.total_score'
       )
       .where('language.user_id', user_id)
-      .first()
+      .first();
   },
 
   getLanguageWords(db, language_id) {
@@ -24,24 +26,34 @@ const LanguageService = {
         'next',
         'memory_value',
         'correct_count',
-        'incorrect_count',
+        'incorrect_count'
       )
-      .where({ language_id })
+      .where({ language_id });
   },
 
   getLanguageWord(db, language_id, user_id) {
-      return db 
-        .from('word AS w')
-        .leftJoin('language AS l', 'l.user_id', user_id)
-        .select(
-          'w.original',
-          'w.correct_count',
-          'w.incorrect_count',
-          'l.total_score',
-        )
-        .where({ language_id })
-        .first()
-  }
-}
+    return db 
+      .from('word AS w')
+      .leftJoin('language AS l', 'l.user_id', user_id)
+      .select(
+        'w.original',
+        'w.correct_count',
+        'w.incorrect_count',
+        'l.total_score'
+      )
+      .where({ language_id })
+      .first();
+  },
+  getLanguageHead(){},
 
-module.exports = LanguageService
+  createLinkedList(language, word) {
+    const SLL = new LinkedList(
+      language.id,
+      language.name,
+      language.total_score,
+      language.user_id
+    );
+  }
+};
+
+module.exports = LanguageService;
