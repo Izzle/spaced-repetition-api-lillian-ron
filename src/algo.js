@@ -34,7 +34,7 @@ function spacedRepititon(sll, answer) {
   } else {
     word.value.M = 1;
   }
-//         1 -> 1 -> 2 -> 2 -> 3 -> 3 -> null 
+//        1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> null 
   // while we arent at the end of the LL
   // and our M is greater than the nextWord M
   // increment 'node'
@@ -47,6 +47,8 @@ function spacedRepititon(sll, answer) {
   sll.remove(word);
 
   if(nextWord === null){
+    // we have to cut the head off, make head.next the new head
+    // and move the head to the new position instead of doing .remove / .insertlast / .insertbefore etc
     sll.insertLast(word.value);
   } else {
     sll.insertBefore(word.value, nextWord);

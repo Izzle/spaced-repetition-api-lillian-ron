@@ -44,16 +44,17 @@ const LanguageService = {
       .where({ language_id })
       .first();
   },
+
   getLanguageHead(){},
 
   createLinkedList(language, word) {
     const SLL = new LinkedList(
       language.id,
-      language.name,
-      language.total_score,
-      language.user_id
+      language.user_id,
+      language.total_score
     );
   }
+
 };
 
 module.exports = LanguageService;

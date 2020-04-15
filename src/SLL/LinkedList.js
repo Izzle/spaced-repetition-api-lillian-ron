@@ -1,22 +1,27 @@
-'use strict';
-
 // each entry in 'word' table is a node
 //   our node.next is word.next
 //   our node.value is everything in word except word.next (which will change)
 // the head of our linked-list is language.head (in the language table as head:word.id)
 
+// TA NOTES:
+// USE  THE DATABASE to implement a Linked List "shape"
+// so instead of using our LinkedList class with its this.head
+// use the Language -> head to find the 'head' your 'linked list'
+// 
+// To move the head M places down:
+
+// Remove the head node from the list
+// Find the node to insert after
+// Change ex-head 'next' to be insert-after 'next'
+// Change insert-after 'next' to be ex-head
 //language.head = word.next
 
 //need:
-  //A way to change the head
-  //A way to change pointers
-  //
+//A way to change the head
+//A way to change pointers
+//
 
-
-
-
-
-//ignore for now
+//! Each _Node is a single 'word' entry in our db
 class _Node {
   constructor(value, next) {
     this.value = value;
@@ -24,8 +29,21 @@ class _Node {
   }
 }
 
+//! What gives our LinkedList structure is the relationship between the
+//! 'word' table (nodes) and the 'language' table (linked list)
 class LinkedList {
-  constructor() {
+  //? Implementation 1: 'typical' linked list class
+  //! NOTE: We don't take the head from 'language.head', that is because
+  //! language.head is keeping track of the starting point of the head
+  //! but we need our 'head' to start at null
+  //!   ITS IMPORTANT TO HAVE A PROJECT IN OUR PORTFOLIOS THAT SHOW EMPLOYERS
+  //!   WE KNOW HOW TO WORK WITH LINKED LISTS. So this method is probably the way to go
+  //!   even though its not ideal
+  //! We should use our LinkedList class to immitate the DB
+  constructor(id, user_id, total_score) {
+    this.id = id;
+    this.user_id = user_id;
+    this.total_score = total_score;
     this.head = null;
   }
 
@@ -44,107 +62,20 @@ class LinkedList {
       tempNode.next = new _Node(item, null);
     }
   }
-
-  find(item) {
-    // start at the head
-    let currentNode = this.head;
-    // if the list is empty
-    if (!this.head) {
-      return null;
-    }
-    // check for the item
-    while (currentNode.value !== item) {
-      // return null if it's the end of the list and the item is not on the list
-      if (currentNode.next === null) {
-        return null;
-      } else {
-        // otherwise, keep looking
-        currentNode = currentNode.next;
-      }
-    }
-    // found it
-    return currentNode;
+  /**
+   * Assuming our Linked List has a sorted value, this will move the head
+   * to its new sorted position and make head.next the new head
+   * @param {number} n the value to sort by //
+   */
+  moveHead(n){
+    let newHeadNode = this.head.next;
+    let oldHeadNode = 
   }
 
-  remove(item) {
-    // if the list is empty
-    if (!this.head) {
-      return null;
-    }
-    // if the node to be removed is head, make the next node head
-    if (this.head.value === item) {
-      this.head = this.head.next;
-      return;
-    }
-    // start at the head
-    let currentNode = this.head;
-    // keep track of previous
-    let previousNode = this.head;
+  _findNewPosition(n){
 
-    while (currentNode !== null && currentNode.value !== item) {
-      // save the previous node
-      previousNode = currentNode;
-      currentNode = currentNode.next;
-    }
-    if (currentNode === null) {
-      console.log('Item not found');
-      return;
-    }
-    previousNode.next = currentNode.next;
-  }
-
-  insertBefore(item, nextItem) {
-    // if the list is empty
-    if (!this.head) {
-      this.insertFirst(item);
-    }
-
-    //finds the spot where the next node === the value of nextItem
-    let tempNode = this.head;
-    let previousNode = this.head;
-    while (tempNode.next.value !== nextItem) {
-      previousNode = tempNode;
-      tempNode = tempNode.next;
-    }
-    previousNode.next = new _Node(item, tempNode.next);
-  }
-
-  insertAfter(item, prevItem) {
-    // if the list is empty
-    if (!this.head) {
-      this.insertFirst(item);
-    }
-
-    //finds where previous value is the previous item, sets the previous pointer to a new node with the old previous pointer used in the new node
-    let nextNode = this.head;
-    let previousNode = this.head;
-    while (previousNode.value !== prevItem) {
-      previousNode = nextNode;
-      nextNode = previousNode.next;
-    }
-    previousNode.next = new _Node(item, previousNode.next);
-  }
-
-  insertAt(item, index) {
-    //if you're inserting at the front
-    if (index === 0) {
-      this.insertFirst(item);
-    }
-
-    /* while you're in a valid node, check to see if it's the position before index, then point to new node, which points at old node's pointer */
-
-    let currentNode = this.head;
-    let i = 0;
-    while (currentNode !== null && i < index - 1) {
-      currentNode = currentNode.next;
-      i++;
-    }
-    if (currentNode === null) {
-      return undefined;
-    } else {
-      currentNode.next = new _Node(item, currentNode.next);
-    }
   }
 }
+
 
 module.exports = LinkedList;
