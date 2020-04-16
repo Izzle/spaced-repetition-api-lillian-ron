@@ -1,3 +1,4 @@
+'use strict';
 // each entry in 'word' table is a node
 //   our node.next is word.next
 //   our node.value is everything in word except word.next (which will change)

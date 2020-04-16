@@ -1,3 +1,4 @@
+'use strict';
 const LinkedList = require('../SLL/LinkedList');
 
 const LanguageService = {
@@ -32,16 +33,24 @@ const LanguageService = {
   },
 
   getLanguageWord(db, language_id, user_id) {
-    return db 
+    return db
+
+    // return db.raw(`SELECT original, correct_count, incorrect_count, total_score
+    //     FROM word w 
+    //     JOIN "language" l 
+    //     ON w.language_id = l.id
+    //     WHERE w.id = ${head};`
+    // );
+    // TODO: test that this works after we can change the data
       .from('word AS w')
-      .leftJoin('language AS l', 'l.user_id', user_id)
+      .where('w.language_id', language_id)
+      .innerJoin('language AS l', 'l.head', 'w.id')
       .select(
         'w.original',
         'w.correct_count',
         'w.incorrect_count',
         'l.total_score'
       )
-      .where({ language_id })
       .first();
   },
 
