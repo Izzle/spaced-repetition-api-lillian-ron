@@ -14,7 +14,9 @@ const words = [
     translation: 'hoo',
     memory_value: 2,
     correct_count: 0,
-    incorrect_count: 0
+    incorrect_count: 0,
+    language_id: 2,
+    next: 2
   },
   {
     id: 2,
@@ -22,7 +24,9 @@ const words = [
     translation: 'dhoo',
     memory_value: 1,
     correct_count: 0,
-    incorrect_count: 0
+    incorrect_count: 0,
+    language_id: 2,
+    next: 3
   },
   {
     id: 3,
@@ -30,7 +34,9 @@ const words = [
     translation: 'hnnaoo',
     memory_value: 1,
     correct_count: 0,
-    incorrect_count: 0
+    incorrect_count: 0,
+    language_id: 2,
+    next: 4
   },
   {
     id: 4,
@@ -38,7 +44,9 @@ const words = [
     translation: 'hobbbbnno',
     memory_value: 2,
     correct_count: 0,
-    incorrect_count: 0
+    incorrect_count: 0,
+    language_id: 2,
+    next: 5
   },
   {
     id: 5,
@@ -46,7 +54,9 @@ const words = [
     translation: 'hoofffff',
     memory_value: 4,
     correct_count: 0,
-    incorrect_count: 0
+    incorrect_count: 0,
+    language_id: 2,
+    next: null
   }
 ];
 
