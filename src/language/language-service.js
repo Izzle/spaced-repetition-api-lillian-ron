@@ -56,8 +56,8 @@ const LanguageService = {
     // language has a 'head' property and words has a 'next'
     let word = { next: language.head };
     // every language is saved like a linked list in the DB so there will be a null at the end
-    while(word.next !== null) {
-      word = words.find(word => word.next === word.id);
+    while(word.next) {
+      word = words.find(w => w.id === word.next);
       // We use insertLast to keep them in order, since we will want to have them sorted by memory_value
       SLL.insertLast({
         id: word.id,
