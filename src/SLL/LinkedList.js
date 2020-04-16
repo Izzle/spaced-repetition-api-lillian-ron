@@ -61,22 +61,36 @@ class LinkedList {
   /**
    * Assuming our Linked List has a sorted value, this will move the head
    * to its new sorted position and make head.next the new head
-   * @param {string} sortProperty name of the property the value to sort by //*(e.g. memory_value)
+   * @param {integer} memoryValue the value to sort by //*(e.g. memory_value)
    */
-  moveHead(sortProperty){
+
+  // To move the head M places down:
+
+  // Remove the head node from the list
+  // Find the node to insert after
+  // Change ex-head 'next' to be insert-after 'next'
+  // Change insert-after 'next' to be ex-head
+  // language.head = word.next
+  moveHead(memoryValue){
     let newHeadNode = this.head.next;
-    let oldHeadNode = this._findSortedPosition(sortProperty);
+    let oldHeadNode = this._findSortedPosition(memoryValue);
     this.head.next = oldHeadNode.next;
     oldHeadNode.next = this.head;
     this.head = newHeadNode;
-    return newHeadNode, oldHeadNode;
+    //return [newHeadNode, oldHeadNode];
+    return newHeadNode;
+
+    // let newHeadNode = this.head.next;
+    // let oldHeadNode = this._findSortedPosition(memoryValue);
+    // this.head.next = 'temp';
+
   }
 
   //! Test this to see if the bracket notation is working
   // TODO: TEST
-  _findSortedPosition(sortProperty){
+  _findSortedPosition(memoryValue){
     let node = this.head;
-    while(node.next !== null && node.value[sortProperty] > node.value.next[sortProperty]) {
+    while(node.next !== null && node.value.memory_value > memoryValue) {
       node = node.next;
     }
     return node;

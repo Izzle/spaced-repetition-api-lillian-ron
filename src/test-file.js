@@ -11,7 +11,7 @@ const words = [
   {
     id: 1,
     original: 'boo',
-    translation: 'hoo',
+    translation: 'cat',
     memory_value: 2,
     correct_count: 0,
     incorrect_count: 0,
@@ -21,7 +21,7 @@ const words = [
   {
     id: 2,
     original: 'dboo',
-    translation: 'dhoo',
+    translation: 'fish',
     memory_value: 1,
     correct_count: 0,
     incorrect_count: 0,
@@ -31,7 +31,7 @@ const words = [
   {
     id: 3,
     original: 'bonnnnnnnnnnnno',
-    translation: 'hnnaoo',
+    translation: 'spidermonkey',
     memory_value: 1,
     correct_count: 0,
     incorrect_count: 0,
@@ -41,7 +41,7 @@ const words = [
   {
     id: 4,
     original: 'bofsdfo',
-    translation: 'hobbbbnno',
+    translation: 'dog',
     memory_value: 2,
     correct_count: 0,
     incorrect_count: 0,
@@ -51,7 +51,7 @@ const words = [
   {
     id: 5,
     original: 'bofffo',
-    translation: 'hoofffff',
+    translation: 'cow',
     memory_value: 4,
     correct_count: 0,
     incorrect_count: 0,
@@ -60,5 +60,16 @@ const words = [
   }
 ];
 
-const result = LanguageService.createLinkedList(lang, words);
-console.log(result);
+const SLL = LanguageService.createLinkedList(lang, words);
+
+function display(SLL) {
+  while(SLL.head !== null){
+    console.log(SLL.head.value);
+    SLL.head = SLL.head.next;
+  }
+}
+
+//display(SLL);
+const modifiedSLL = SLL.moveHead(2);
+display(modifiedSLL);
+//console.log(SLL.moveHead(2));
