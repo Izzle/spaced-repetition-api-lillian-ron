@@ -84,22 +84,30 @@ languageRouter
       )
 
       const SLL = await LanguageService.createLinkedList(req.language, words)
-      const answer = SLL.head.value.translation;
-
+      const answer = SLL.head.value.translation
+      let isCorrect
       if(guess.toLowerCase() === answer.toLowerCase()) {
-        // true
-        // memory_value * 2
-        // increase correct_count and total_score
+        SLL.head.value.memory_value *= 2
+        SLL.head.value.total_score++
+        SLL.head.value.correct_count++
+        isCorrect = true
       } else {
-        // false
-        // memory_value = 1
-        // increase incorrect_count
+        SLL.head.value.memory_value = 1
+        SLL.head.value.incorrect_count++
+        isCorrect = false
       }
+      console.log(SLL.head.value.memory_value)
 
 
-      // send back original, answer, guess, totalScore, 
-      // and MAYBE true/false named "someVarName" <== replace varname
-      res.send('implement me!') 
+      res.status(200).json({
+        nextWord: word.original,
+        wordCorrectCount: word.correct_count,
+        wordIncorrectCount: word.incorrect_count,
+        totalScore: word.total_score,
+        answer,
+        isCorrect
+      })
+
       next()
     } catch (error) {
         next(error)
