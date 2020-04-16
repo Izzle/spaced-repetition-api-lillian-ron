@@ -85,22 +85,37 @@ languageRouter
 
       const SLL = await LanguageService.createLinkedList(req.language, words)
       const answer = SLL.head.value.translation
+      let { memory_value, correct_count, incorrect_count } = SLL.head.value
       let totalScore = req.language.total_score
       let isCorrect
 
       if(guess.toLowerCase() === answer.toLowerCase()) {
-        SLL.head.value.memory_value *= 2
-        SLL.head.value.correct_count++
+        memory_value *= 2
+        correct_count++
         totalScore++
         isCorrect = true
       } else {
-        SLL.head.value.memory_value = 1
-        SLL.head.value.incorrect_count++
+        memory_value = 1
+        incorrect_count++
         isCorrect = false
       }
-      console.log(totalScore)
+      console.log(memory_value, correct_count, incorrect_count)
+    //   console.log(totalScore)
+    //   console.log(wordCorrectCount, wordIncorrectCount)
+      
      // SLL.display()
       // move head
+
+      // save the new values to the head word in db 
+      const updateValues = {
+
+      }
+      // remove the head node from the SLL
+      //   find where it should be inserted after
+      //   change the ex-head.next to be insert-afters.next
+      //   change insert-afters.next to be ex-head
+      // make the new head e.g. update language .head and total_score (language.head = word.next)
+
 
       // update head in language
       // update total_score in language (cant get total_score from SLL)
@@ -121,8 +136,8 @@ languageRouter
     //! Temp data for front end to use
     res.status(200).json({
         nextWord: 'some japanese word',
-        wordCorrectCount: 5,
-        wordIncorrectCount: 2,
+        wordCorrectCount: correct_count, // working, but needs to be saved in DB
+        wordIncorrectCount: incorrect_count, // working, but needs to be saved in DB
         totalScore, // working, but needs to be saved in the DB
         answer,   // working
         isCorrect // working
