@@ -65,15 +65,20 @@ class LinkedList {
   /**
    * Assuming our Linked List has a sorted value, this will move the head
    * to its new sorted position and make head.next the new head
-   * @param {number} n the value to sort by //
+   * @param {string} sortProperty name of the property the value to sort by //*(e.g. memory_value)
    */
-  moveHead(n){
+  moveHead(sortProperty){
     let newHeadNode = this.head.next;
-    let oldHeadNode = 
+    let oldHeadNode = this._findSortedPosition(sortProperty);
+
   }
 
-  _findNewPosition(n){
-
+  _findSortedPosition(sortProperty){
+    let node = this.head;
+    while(node.next !== null && node.value[sortProperty] > node.value.next[sortProperty]) {
+      node = node.next;
+    }
+    return node;
   }
 }
 
