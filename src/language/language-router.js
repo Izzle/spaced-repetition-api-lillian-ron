@@ -87,7 +87,7 @@ languageRouter
       const answer = SLL.head.value.translation
       let totalScore = req.language.total_score
       let isCorrect
-      
+
       if(guess.toLowerCase() === answer.toLowerCase()) {
         SLL.head.value.memory_value *= 2
         SLL.head.value.correct_count++
@@ -108,6 +108,7 @@ languageRouter
       // update correct_count or incorrect_count in words
       // update 'next' in words
 
+    //! what our actual response should be
     //   res.status(200).json({
     //     nextWord: word.original,
     //     wordCorrectCount: word.correct_count,
@@ -116,7 +117,16 @@ languageRouter
     //     answer,
     //     isCorrect
     //   })
-      res.json({ok: 'lol'})
+
+    //! Temp data for front end to use
+    res.status(200).json({
+        nextWord: 'some japanese word',
+        wordCorrectCount: 5,
+        wordIncorrectCount: 2,
+        totalScore, // working, but needs to be saved in the DB
+        answer,   // working
+        isCorrect // working
+      })
 
       next()
     } catch (error) {
