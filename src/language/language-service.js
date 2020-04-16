@@ -56,6 +56,13 @@ const LanguageService = {
 
   getLanguageHead(){},
 
+  
+  setHeadWord(db, language_id, word, values){
+    return db
+      .where()
+      .update()
+  },
+
   createLinkedList(language, words) {
     const SLL = new LinkedList();
     // language has a 'head' property and words has a 'next'

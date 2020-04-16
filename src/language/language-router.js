@@ -99,19 +99,24 @@ languageRouter
         incorrect_count++
         isCorrect = false
       }
-      console.log(memory_value, correct_count, incorrect_count)
-    //   console.log(totalScore)
-    //   console.log(wordCorrectCount, wordIncorrectCount)
-      
+      //console.log(SLL.head.value.id)
+      console.log(req.language.head)
      // SLL.display()
       // move head
 
       // save the new values to the head word in db 
-      const updateValues = {
-
+      const updateHeadValues = {
+        memory_value,
+        correct_count,
+        incorrect_count
       }
+      LanguageService.setLanguageHeadWord(
+          req.app.get('db'),
+          req.language.id,
+          updateHeadValues
+      )
       // remove the head node from the SLL
-      //   find where it should be inserted after
+      //   find where it should be inserted after (get the WORD ID)
       //   change the ex-head.next to be insert-afters.next
       //   change insert-afters.next to be ex-head
       // make the new head e.g. update language .head and total_score (language.head = word.next)
