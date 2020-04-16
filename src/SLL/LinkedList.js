@@ -32,14 +32,9 @@ class _Node {
 //! What gives our LinkedList structure is the relationship between the
 //! 'word' table (nodes) and the 'language' table (linked list)
 class LinkedList {
-  //? Implementation 1: 'typical' linked list class
   //! NOTE: We don't take the head from 'language.head', that is because
   //! language.head is keeping track of the starting point of the head
   //! but we need our 'head' to start at null
-  //!   ITS IMPORTANT TO HAVE A PROJECT IN OUR PORTFOLIOS THAT SHOW EMPLOYERS
-  //!   WE KNOW HOW TO WORK WITH LINKED LISTS. So this method is probably the way to go
-  //!   even though its not ideal
-  //! We should use our LinkedList class to immitate the DB
   constructor(id, user_id, total_score) {
     this.id = id;
     this.user_id = user_id;
