@@ -76,10 +76,10 @@ languageRouter
             error: `Missing 'guess' in request body`
         })
       }
-    
+
     try {
       words = await LanguageService.getLanguageWords(
-          req.app.get('id'),
+          req.app.get('db'),
           req.language.id
       )
 
@@ -96,17 +96,25 @@ languageRouter
         SLL.head.value.incorrect_count++
         isCorrect = false
       }
+
       console.log(SLL.head.value.memory_value)
+      // move head
 
+      // update head in language
+      // update total_score in language
+      // update memory_value in words
+      // update correct_count or incorrect_count in words
+      // update 'next' in words
 
-      res.status(200).json({
-        nextWord: word.original,
-        wordCorrectCount: word.correct_count,
-        wordIncorrectCount: word.incorrect_count,
-        totalScore: word.total_score,
-        answer,
-        isCorrect
-      })
+    //   res.status(200).json({
+    //     nextWord: word.original,
+    //     wordCorrectCount: word.correct_count,
+    //     wordIncorrectCount: word.incorrect_count,
+    //     totalScore: word.total_score,
+    //     answer,
+    //     isCorrect
+    //   })
+      res.json({ok: 'lol'})
 
       next()
     } catch (error) {
