@@ -84,10 +84,11 @@ languageRouter
 
       const SLL = await LanguageService.createLinkedList(req.language, words)
 
-      
 
 
-      res.send('implement me!')
+      // send back original, answer, guess, totalScore, 
+      // and MAYBE true/false named "someVarName" <== replace varname
+      res.send('implement me!') 
       next()
     } catch (error) {
         next(error)
