@@ -14,7 +14,7 @@
 // Find the node to insert after
 // Change ex-head 'next' to be insert-after 'next'
 // Change insert-after 'next' to be ex-head
-//language.head = word.next
+// language.head = word.next
 
 //need:
 //A way to change the head
@@ -70,9 +70,14 @@ class LinkedList {
   moveHead(sortProperty){
     let newHeadNode = this.head.next;
     let oldHeadNode = this._findSortedPosition(sortProperty);
-
+    this.head.next = oldHeadNode.next;
+    oldHeadNode.next = this.head;
+    this.head = newHeadNode;
+    return newHeadNode, oldHeadNode;
   }
 
+  //! Test this to see if the bracket notation is working
+  // TODO: TEST
   _findSortedPosition(sortProperty){
     let node = this.head;
     while(node.next !== null && node.value[sortProperty] > node.value.next[sortProperty]) {
