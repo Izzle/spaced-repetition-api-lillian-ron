@@ -105,7 +105,7 @@ languageRouter
       // move head
 
       // save the new values to the head word in db 
-      const updateHeadValues = {
+      const updatedValues = {
         memory_value,
         correct_count,
         incorrect_count
@@ -113,7 +113,8 @@ languageRouter
       LanguageService.setLanguageHeadWord(
           req.app.get('db'),
           req.language.id,
-          updateHeadValues
+          SLL.head.value.id,
+          updatedValues
       )
       // remove the head node from the SLL
       //   find where it should be inserted after (get the WORD ID)

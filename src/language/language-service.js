@@ -57,24 +57,32 @@ const LanguageService = {
   getLanguageHead(){},
 
   /**
-   * 
+   * Updates the values of the word that is current 
    * @param {*} db knex instance
-   * @param {*} language_id word.language_id
-   * @param {*} original_word word.original
+   * @param {*} id word.id
    * @param {*} values the values you wish to update
    */
-  setLanguageHeadWord(db, language_id, original_word, values){
-    return db
-      .raw(`UPDATE 
-              word
-            SET
-              memory_value = ${values.memory_value},
-              correct_count = ${values.correct_count},
-              incorrect_count = ${values.incorrect_count}
-            WHERE
-              language_id = ${language_id},
-              original = ${original_word};
-      `);
+  setLanguageHeadWord(db, id, values){
+    return db('word')
+      .where({ id })
+      .update( 'memory_value', values.memory_value )
+      .update( 'correct_count', values.correct_count )
+      .update( 'incorrect_count', values.incorrect_count );
+    //   .update({
+    //     memory_value: values.memory_value,
+    //     correct_count: values.correct_count,
+    //     incorrect_count: values.incorrect_count
+    //   });
+    // return db
+    //   .raw(`UPDATE 
+    //           word
+    //         SET
+    //           memory_value = ${values.memory_value},
+    //           correct_count = ${values.correct_count},
+    //           incorrect_count = ${values.incorrect_count}
+    //         WHERE
+    //           id = ${id};
+    //   `);
   },
 
   createLinkedList(language, words) {
