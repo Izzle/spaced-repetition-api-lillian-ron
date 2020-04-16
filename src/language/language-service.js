@@ -57,11 +57,7 @@ const LanguageService = {
   getLanguageHead(){},
 
   createLinkedList(language, words) {
-    const SLL = new LinkedList(
-      language.id,
-      language.user_id,
-      language.total_score
-    );
+    const SLL = new LinkedList();
     // language has a 'head' property and words has a 'next'
     let word = { next: language.head };
     // every language is saved like a linked list in the DB so there will be a null at the end
