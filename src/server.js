@@ -8,7 +8,7 @@ const db = knex({
   client: 'pg',
   connection: DB_URL,
 })
-console.log(db)
+console.log(JSON.stringify(db))
 app.set('db', db)
 
 app.listen(PORT, () => {
