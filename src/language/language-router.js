@@ -99,22 +99,22 @@ languageRouter
         isCorrect = false
       }
       
-      //SLL.display()
-      // move head
-      const results = await SLL.moveHead(SLL.head.value.memory_value);
+      // move head 'M' places back. 
+      // After this point, SLL looks exactly as we want the database to be
+      SLL.moveHead(SLL.head.value.memory_value);
+     // SLL.display();
 
-      // await LanguageService.moveLanguageHead(
-      //   req.app.get('db'),
-      //   req.language.id,
-      //   SLL.head.word.id,
-      //   totalScore
-      // )
+      // update the Language.head
+      // update Language.total_score
+      // update all the Words table (memory_values, correct_count, incorrect_count, next)
+
+
 
       //update words
-      // await LanguageService.updateWords(
-      //   req.app.get('db'),
-      //   SLL
-      // )
+      await LanguageService.updateWords(
+        req.app.get('db'),
+        SLL
+      )
 
       //set new head to a const
       // const newHead = await LanguageService.getLanguageHead(

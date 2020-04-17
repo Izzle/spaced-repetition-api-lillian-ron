@@ -56,6 +56,8 @@ const LanguageService = {
 
   getLanguageHead(){},
 
+  setLanguageHead(db, ){},
+
   /**
    * Updates the values of the word that is current 
    * @param {*} db knex instance
@@ -63,16 +65,19 @@ const LanguageService = {
    * @param {*} values the values you wish to update
    */
   setLanguageHeadWord(db, id, values){
+    console.log(id, values);
+
     return db('word')
       .where({ id })
-      .update( 'memory_value', values.memory_value )
-      .update( 'correct_count', values.correct_count )
-      .update( 'incorrect_count', values.incorrect_count );
-    //   .update({
-    //     memory_value: values.memory_value,
-    //     correct_count: values.correct_count,
-    //     incorrect_count: values.incorrect_count
-    //   });
+      .update({
+        memory_value: values.memory_value,
+        correct_count: values.correct_count,
+        incorrect_count: values.incorrect_count,
+      });
+    //   .update( 'memory_value', values.memory_value )
+    //   .update( 'correct_count', values.correct_count )
+    //   .update( 'incorrect_count', values.incorrect_count );
+
     // return db
     //   .raw(`UPDATE 
     //           word
@@ -85,6 +90,52 @@ const LanguageService = {
     //   `);
   },
 
+  // updateWords(db, list) {
+  //   return db.transaction(async trx => {
+        
+  //   let currentWord = list.head
+  //   while(currentWord !== null) {
+  //     let currentNext = currentWord.next
+  //     await trx
+  //       .from('word')
+  //       .where('id', currentWord.value.id)
+  //       .update({
+  //         memory_value: currentWord.value.memory_value,
+  //         correct_count: currentWord.value.correct_count,
+  //         incorrect_count: currentWord.value.incorrect_count,
+  //         next: currentNext.value.id,
+  //      })
+  //      currentWord = currentWord.next;
+  //     } 
+  //   })
+  // },
+
+
+  updateWords(db, list) {
+    return db.transaction(trx => {
+    const queries = []
+    let currentWord = list.head
+    while(currentWord !== null) {
+      // let currentNext = currentWord.next
+      const query = db('word')
+        .where('id', currentWord.value.id)
+        .update({
+          memory_value: currentWord.value.memory_value,
+          correct_count: currentWord.value.correct_count,
+          incorrect_count: currentWord.value.incorrect_count,
+          next: currentWord.next ? currentWord.next.value.id : null,
+       })
+       .transacting(trx) // this makes every update be in the same transaction
+       queries.push(query)
+       currentWord = currentWord.next
+    } 
+
+    Promise.all(queries)
+      .then(trx.commit)
+      .catch(trx.rollback)
+    })
+  },
+  
   createLinkedList(language, words) {
     const SLL = new LinkedList();
     // language has a 'head' property and words has a 'next'
