@@ -101,20 +101,30 @@ languageRouter
       
       // move head 'M' places back. 
       // After this point, SLL looks exactly as we want the database to be
-      SLL.moveHead(SLL.head.value.memory_value);
-     // SLL.display();
+      SLL.moveHead(SLL.head.value.memory_value)
+      //SLL.display()
 
       // update the Language.head
+      await LanguageService.updateLanguageHead(
+          req.app.get('db'),
+          req.language.id,
+          SLL.head.value.id
+      )
+      
       // update Language.total_score
-      // update all the Words table (memory_values, correct_count, incorrect_count, next)
-
-
+      await LanguageService.updateTotalScore(
+        req.app.get('db'),
+        req.language.id,
+        totalScore
+      )
 
       //update words
       await LanguageService.updateWords(
         req.app.get('db'),
         SLL
       )
+    
+    
 
       //set new head to a const
       // const newHead = await LanguageService.getLanguageHead(
