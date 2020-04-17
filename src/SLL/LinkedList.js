@@ -181,6 +181,7 @@ class LinkedList {
       tempNode.next = new _Node(originalHead.value, tempNode.next);
     }
     this.insertLast(originalHead.value);
+
   }
 
   // Displays the LinkedList in the console

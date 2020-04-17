@@ -102,8 +102,8 @@ languageRouter
       // move head 'M' places back. 
       // After this point, SLL looks exactly as we want the database to be
       SLL.moveHead(SLL.head.value.memory_value)
-      //SLL.display()
 
+      
       // update the Language.head
       await LanguageService.updateLanguageHead(
           req.app.get('db'),
@@ -124,14 +124,7 @@ languageRouter
         SLL
       )
     
-    
-
-      //set new head to a const
-      // const newHead = await LanguageService.getLanguageHead(
-      //   req.app.get('db'),
-      //   req.language.id
-      // );
-
+     SLL.display()
 
       // remove the head node from the SLL (make head = head.next)
       //   find where it should be inserted after (get the WORD ID)
