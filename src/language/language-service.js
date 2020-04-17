@@ -1,4 +1,3 @@
-'use strict';
 const LinkedList = require('../SLL/LinkedList');
 
 const LanguageService = {
@@ -34,14 +33,6 @@ const LanguageService = {
 
   getLanguageWord(db, language_id, user_id) {
     return db
-
-    // return db.raw(`SELECT original, correct_count, incorrect_count, total_score
-    //     FROM word w 
-    //     JOIN "language" l 
-    //     ON w.language_id = l.id
-    //     WHERE w.id = ${head};`
-    // );
-    // TODO: test that this works after we can change the data
       .from('word AS w')
       .where('w.language_id', language_id)
       .innerJoin('language AS l', 'l.head', 'w.id')
@@ -53,8 +44,6 @@ const LanguageService = {
       )
       .first();
   },
-
-  getLanguageHead(){},
 
   /**
    * 
@@ -78,8 +67,8 @@ const LanguageService = {
 
   updateWords(db, list) {
     return db.transaction(trx => {
-      const queries = []
-      let currentWord = list.head
+      const queries = [];
+      let currentWord = list.head;
       while(currentWord !== null) {
       // let currentNext = currentWord.next
         const query = db('word')
@@ -90,15 +79,15 @@ const LanguageService = {
             incorrect_count: currentWord.value.incorrect_count,
             next: currentWord.next ? currentWord.next.value.id : null,
           })
-          .transacting(trx) // this makes every update be in the same transaction
-        queries.push(query)
-        currentWord = currentWord.next
+          .transacting(trx); // this makes every update be in the same transaction
+        queries.push(query);
+        currentWord = currentWord.next;
       } 
 
       Promise.all(queries)
         .then(trx.commit)
-        .catch(trx.rollback)
-    })
+        .catch(trx.rollback);
+    });
   },
   
   createLinkedList(language, words) {

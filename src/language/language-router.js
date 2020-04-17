@@ -98,12 +98,15 @@ languageRouter
         SLL.head.value.incorrect_count++
         isCorrect = false
       }
-      
+      // get the values for the correct count before changing the head
+      let nextWord = SLL.head.value.original
+      let wordCorrectCount = SLL.head.value.correct_count
+      let wordIncorrectCount = SLL.head.value.incorrect_count
+
       // move head 'M' places back. 
       // After this point, SLL looks exactly as we want the database to be
       SLL.moveHead(SLL.head.value.memory_value)
 
-      
       // update the Language.head
       await LanguageService.updateLanguageHead(
           req.app.get('db'),
@@ -124,39 +127,15 @@ languageRouter
         SLL
       )
     
-     SLL.display()
+    SLL.display()
 
-      // remove the head node from the SLL (make head = head.next)
-      //   find where it should be inserted after (get the WORD ID)
-      //   change the ex-head.next to be insert-afters.next
-      //   change insert-afters.next to be ex-head
-      // make the new head e.g. update language .head and total_score (language.head = word.next)
-
-
-      // update head in language
-      // update total_score in language (cant get total_score from SLL)
-      // update memory_value in words
-      // update correct_count or incorrect_count in words
-      // update 'next' in words
-
-    //! what our actual response should be
-    //   res.status(200).json({
-    //     nextWord: word.original,
-    //     wordCorrectCount: word.correct_count,
-    //     wordIncorrectCount: word.incorrect_count,
-    //     totalScore: word.total_score,
-    //     answer,
-    //     isCorrect
-    //   })
-
-    //! Temp data for front end to use
     res.status(200).json({
-        nextWord: 'some japanese word',
-       // wordCorrectCount: SLL.head.value.correct_count, // working, but needs to be saved in DB
-      //  wordIncorrectCount: SLL.head.value.incorrect_count, // working, but needs to be saved in DB
-        totalScore, // working, but needs to be saved in the DB
-        answer,   // working
-        isCorrect // working
+        nextWord, 
+        wordCorrectCount,
+        wordIncorrectCount,
+        totalScore, 
+        answer, 
+        isCorrect 
       })
 
       next()
