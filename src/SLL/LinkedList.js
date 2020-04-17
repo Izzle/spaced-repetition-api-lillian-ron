@@ -179,9 +179,10 @@ class LinkedList {
     } 
     if(tempNode !== null){
       tempNode.next = new _Node(originalHead.value, tempNode.next);
+    } else {
+      this.insertLast(originalHead.value);
     }
-    this.insertLast(originalHead.value);
-
+    
   }
 
   // Displays the LinkedList in the console
