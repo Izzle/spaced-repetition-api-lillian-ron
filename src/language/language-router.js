@@ -85,38 +85,45 @@ languageRouter
 
       const SLL = await LanguageService.createLinkedList(req.language, words)
       const answer = SLL.head.value.translation
-      let { memory_value, correct_count, incorrect_count } = SLL.head.value
       let totalScore = req.language.total_score
       let isCorrect
 
       if(guess.toLowerCase() === answer.toLowerCase()) {
-        memory_value *= 2
-        correct_count++
+        SLL.head.value.memory_value *= 2
+        SLL.head.value.correct_count++
         totalScore++
         isCorrect = true
       } else {
-        memory_value = 1
-        incorrect_count++
+        SLL.head.value.memory_value = 1
+        SLL.head.value.incorrect_count++
         isCorrect = false
       }
-      //console.log(SLL.head.value.id)
-      console.log(req.language.head)
-     // SLL.display()
+      
+      //SLL.display()
       // move head
+      const results = await SLL.moveHead(SLL.head.value.memory_value);
 
-      // save the new values to the head word in db 
-      const updatedValues = {
-        memory_value,
-        correct_count,
-        incorrect_count
-      }
-      LanguageService.setLanguageHeadWord(
-          req.app.get('db'),
-          req.language.id,
-          SLL.head.value.id,
-          updatedValues
-      )
-      // remove the head node from the SLL
+      // await LanguageService.moveLanguageHead(
+      //   req.app.get('db'),
+      //   req.language.id,
+      //   SLL.head.word.id,
+      //   totalScore
+      // )
+
+      //update words
+      // await LanguageService.updateWords(
+      //   req.app.get('db'),
+      //   SLL
+      // )
+
+      //set new head to a const
+      // const newHead = await LanguageService.getLanguageHead(
+      //   req.app.get('db'),
+      //   req.language.id
+      // );
+
+
+      // remove the head node from the SLL (make head = head.next)
       //   find where it should be inserted after (get the WORD ID)
       //   change the ex-head.next to be insert-afters.next
       //   change insert-afters.next to be ex-head
@@ -142,8 +149,8 @@ languageRouter
     //! Temp data for front end to use
     res.status(200).json({
         nextWord: 'some japanese word',
-        wordCorrectCount: correct_count, // working, but needs to be saved in DB
-        wordIncorrectCount: incorrect_count, // working, but needs to be saved in DB
+       // wordCorrectCount: SLL.head.value.correct_count, // working, but needs to be saved in DB
+      //  wordIncorrectCount: SLL.head.value.incorrect_count, // working, but needs to be saved in DB
         totalScore, // working, but needs to be saved in the DB
         answer,   // working
         isCorrect // working

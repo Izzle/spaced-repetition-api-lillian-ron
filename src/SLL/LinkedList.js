@@ -112,7 +112,7 @@ class LinkedList {
     }
     return node;
   }
-  
+
   remove(item){ 
     //if the list is empty
     if (!this.head){
@@ -160,13 +160,6 @@ class LinkedList {
     //found it
     return currNode;
   }
-
-  /**
-   * Assuming our Linked List has a sorted value, this will move the head
-   * to its new sorted position and make head.next the new head
-   * @param {integer} memoryValue the value to sort by //*(e.g. memory_value)
-   */
-
   // To move the head M places down:
 
   // Remove the head node from the list
@@ -175,31 +168,19 @@ class LinkedList {
   // Change insert-after 'next' to be ex-head        (insertAfter.next = head)
   // language.head = word.next    (make the new head the head.next)
   moveHead(memoryValue){
-
-    let newHeadNode = this.head.next;
-    let oldHeadNode = this._findSortedPosition(memoryValue);
-    this.head.next = oldHeadNode.next;
-    oldHeadNode.next = this.head;
-    this.head = newHeadNode;
-    //return [newHeadNode, oldHeadNode];
-    return newHeadNode;
-
-    // let newHeadNode = this.head.next;
-    // let oldHeadNode = this._findSortedPosition(memoryValue);
-    // this.head.next = 'temp';
-
-
-
-  }
-
-  //! Test this to see if the bracket notation is working
-  // TODO: TEST
-  _findSortedPosition(memoryValue){
-    let node = this.head;
-    while(node.next !== null && node.value.memory_value > memoryValue) {
-      node = node.next;
+    // save the originalHead
+    let originalHead = this.head;
+    // remove the head
+    this.remove(this.head.value);
+    // Move the head back 'M'(memory_value) places in the list
+    let tempNode = this.head;
+    while(tempNode !== null && tempNode.value.memory_value !== memoryValue){
+      tempNode = tempNode.next;
+    } 
+    if(tempNode !== null){
+      tempNode.next = new _Node(originalHead.value, tempNode.next);
     }
-    return node;
+    this.insertLast(originalHead.value);
   }
 
   // Displays the LinkedList in the console
