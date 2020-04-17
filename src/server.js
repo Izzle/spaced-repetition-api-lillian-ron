@@ -8,7 +8,7 @@ const db = knex({
   client: 'pg',
   connection: DB_URL,
 })
-  console.log(db.config)
+  console.log(db.client.config)
  // console.log(JSON.stringify(db))
     
 
